@@ -41,6 +41,7 @@ const SearchIcon = styled(Icon)`
   margin: auto;
   width: 16px;
   height: 16px;
+  color: ${COLORS.gray[300]}
 `;
 
 export default SearchInput;

@@ -31,19 +31,34 @@ const ShoeCard = ({
       ? 'new-release'
       : 'default'
 
+  console.log('Slug: ', slug, variant);
+
   return (
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
+          {variant === 'new-release' && (
+            <VariantBanner style={{ '--background-color': COLORS.secondary }}>
+              Just Released!
+            </VariantBanner>
+          )}
+          {variant === 'on-sale' && (
+            <VariantBanner style={{ '--background-color': COLORS.primary }}>
+              Sale
+            </VariantBanner>
+          )}
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price isSale={variant === 'on-sale'}>{formatPrice(price)}</Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          {variant === 'on-sale' && (
+            <SalePrice>{formatPrice(salePrice)}</SalePrice>
+          )}
         </Row>
       </Wrapper>
     </Link>
@@ -53,6 +68,7 @@ const ShoeCard = ({
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
+  flex: 1 1 300px;
 `;
 
 const Wrapper = styled.article``;
@@ -61,10 +77,33 @@ const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 100%;
+  border-radius: 16px 16px 4px 4px;
+`;
+
+const VariantBanner = styled.div`
+  position: absolute;
+  top: 12px;
+  right: -4px;
+  color: ${COLORS.white};
+  font-weight: 700;
+  font-size: 0.875rem;
+  height: 2rem;
+  border-radius: 2px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--background-color);
+`;
 
 const Row = styled.div`
+  padding: 2px 0 2px 2px;
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Name = styled.h3`
@@ -72,7 +111,19 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  font-weight: ${WEIGHTS.normal};
+  color: ${COLORS.gray[900]};
+
+  ${(p) => {
+    if (p.isSale) {
+      return {
+        color: COLORS.gray[700],
+        textDecoration: 'line-through',
+      };
+    }
+  }};
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
