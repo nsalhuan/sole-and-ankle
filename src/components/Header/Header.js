@@ -12,9 +12,9 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <LogoDiv>
+        <Side>
           <Logo />
-        </LogoDiv>
+        </Side>
         <Nav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
@@ -23,6 +23,7 @@ const Header = () => {
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
+        <Side />
       </MainHeader>
     </header>
   );
@@ -30,28 +31,17 @@ const Header = () => {
 
 // TODO: This is not super dynamic
 const MainHeader = styled.div`
-  padding: 0 32px;
+  padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-`;
-
-const InnerHeaderDiv = styled.div`
-  display: flex;
   align-items: baseline;
 `;
 
-const LogoDiv = styled.div`
-  left: 32px;
-  top: 0;
-  bottom: 0;
-  height: fit-content;
-  margin-top: auto;
-  margin-bottom: auto;
-  position: absolute;
+const Side = styled.div`
+  flex: 1;
 `;
 
 const Nav = styled.nav`
@@ -59,13 +49,7 @@ const Nav = styled.nav`
   /* padding: 0 370px; */
   /* justify-content: space-between; */
   gap: 48px;
-  justify-content: center;
-  /* align-self: center; */
-  /* flex: 1; */
-  margin-top: 3px;
-  /* margin-left: 200px; */
-  flex-basis: content;
-  /* padding-left: 200px; */
+  margin: 0px 48px;
 `;
 
 const NavLink = styled.a`

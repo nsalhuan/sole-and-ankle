@@ -39,15 +39,9 @@ const ShoeCard = ({
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
           {variant === 'new-release' && (
-            <VariantBanner style={{ '--background-color': COLORS.secondary }}>
-              Just Released!
-            </VariantBanner>
+            <NewReleaseBanner>Just Released!</NewReleaseBanner>
           )}
-          {variant === 'on-sale' && (
-            <VariantBanner style={{ '--background-color': COLORS.primary }}>
-              Sale
-            </VariantBanner>
-          )}
+          {variant === 'on-sale' && <SaleBanner>Sale</SaleBanner>}
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
@@ -95,8 +89,14 @@ const VariantBanner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
 
-  background-color: var(--background-color);
+const NewReleaseBanner = styled(VariantBanner)`
+  background-color: ${COLORS.secondary};
+`;
+
+const SaleBanner = styled(VariantBanner)`
+  background-color: ${COLORS.primary};
 `;
 
 const Row = styled.div`
